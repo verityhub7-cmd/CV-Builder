@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SmartCV Builder — Create Professional Resumes Instantly</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="logo">Smart<span>CV</span></div>
+    <div class="nav-buttons">
+      <button class="login-btn" onclick="openModal('loginModal')">Login</button>
+      <button class="signup-btn" onclick="openModal('signupModal')">Get Started Free</button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-left">
+      <div class="hero-badge">AI-Powered Resume Builder</div>
+      <h1>Build Your <span class="accent">Dream Resume</span> in Minutes</h1>
+      <p>Professional templates, live preview, and one-click PDF export. Land your next job with a resume that stands out from the crowd.</p>
+      <div class="hero-actions">
+        <button class="cta-btn" onclick="window.location.href='form.html'">🚀 Start Building Free</button>
+        <button class="secondary-btn" onclick="document.getElementById('templates').scrollIntoView({behavior:'smooth'})">View Templates</button>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><strong>10+</strong><span>Templates</span></div>
+        <div class="stat"><strong>Free</strong><span>PDF Export</span></div>
+        <div class="stat"><strong>5 min</strong><span>To Build</span></div>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="floating-badge badge-1">
+        <div class="badge-dot"></div> Resume Ready!
+      </div>
+      <div class="resume-card">
+        <div class="top"></div>
+        <div class="content">
+          <h2>John Smith</h2>
+          <p>Senior Frontend Developer</p>
+          <div class="line"></div>
+          <div class="line short"></div>
+          <div class="line"></div>
+          <div class="line shorter"></div>
+          <div class="line"></div>
+          <div class="line short"></div>
+        </div>
+      </div>
+      <div class="floating-badge badge-2">
+        <div class="badge-dot"></div> 10+ Templates
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="features" id="features">
+    <p class="section-label">Why SmartCV</p>
+    <h2 class="section-title">Everything You Need</h2>
+    <p class="section-sub">A complete toolkit for building resumes that get interviews.</p>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">⚡</div>
+        <h3>Live Preview</h3>
+        <p>See your resume update in real-time as you type. No more guessing how it will look.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🎨</div>
+        <h3>10+ Templates</h3>
+        <p>Choose from Modern, Minimal, Corporate, Creative, and more. Switch anytime.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📄</div>
+        <h3>PDF Download</h3>
+        <p>Export your resume as a perfect, print-ready PDF with one click. No account needed.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📱</div>
+        <h3>Mobile Friendly</h3>
+        <p>Build and edit your resume from any device — phone, tablet, or desktop.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🎯</div>
+        <h3>ATS Optimized</h3>
+        <p>Templates designed to pass Applicant Tracking Systems and reach human recruiters.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔒</div>
+        <h3>Privacy First</h3>
+        <p>Your data stays in your browser. We never store or share your personal information.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEMPLATES -->
+  <section class="templates-section" id="templates">
+    <p class="section-label">Templates</p>
+    <h2 class="section-title">Pick Your Style</h2>
+    <p class="section-sub">Professional templates for every industry and career stage.</p>
+    <div class="templates-grid">
+
+      <div class="template-card" onclick="selectTemplate('modern')">
+        <div class="template-preview modern">
+          <div class="tp-name white">ALEX JOHNSON</div>
+          <div style="font-size:10px;color:rgba(255,255,255,0.5);margin-bottom:8px;">Software Engineer</div>
+          <div class="tp-divider white"></div>
+          <div class="tp-line white"></div>
+          <div class="tp-line white short"></div>
+          <div class="tp-line white"></div>
+          <div class="tp-line white shorter"></div>
+        </div>
+        <div class="template-info">
+          <span class="template-name">Modern Dark</span>
+          <span class="template-label label-free">Free</span>
+        </div>
+      </div>
+
+      <div class="template-card" onclick="selectTemplate('minimal')">
+        <div class="template-preview minimal">
+          <div class="tp-name dark">SARAH MILLS</div>
+          <div style="font-size:10px;color:#94a3b8;margin-bottom:8px;">Product Designer</div>
+          <div class="tp-divider dark"></div>
+          <div class="tp-line dark"></div>
+          <div class="tp-line dark short"></div>
+          <div class="tp-line dark"></div>
+          <div class="tp-line dark shorter"></div>
+        </div>
+        <div class="template-info">
+          <span class="template-name">Minimal Clean</span>
+          <span class="template-label label-free">Free</span>
+        </div>
+      </div>
+
+      <div class="template-card" onclick="selectTemplate('corporate')">
+        <div class="template-preview corporate">
+          <div class="tp-name white">JAMES CARTER</div>
+          <div style="font-size:10px;color:rgba(255,255,255,0.6);margin-bottom:8px;">Business Analyst</div>
+          <div class="tp-divider white"></div>
+          <div class="tp-line white"></div>
+          <div class="tp-line white short"></div>
+          <div class="tp-line white"></div>
+          <div class="tp-line white shorter"></div>
+        </div>
+        <div class="template-info">
+          <span class="template-name">Corporate Blue</span>
+          <span class="template-label label-free">Free</span>
+        </div>
+      </div>
+
+      <div class="template-card" onclick="selectTemplate('creative')">
+        <div class="template-preview creative">
+          <div class="tp-name white">MIA ROSS</div>
+          <div style="font-size:10px;color:rgba(255,255,255,0.6);margin-bottom:8px;">UX Designer</div>
+          <div class="tp-divider white"></div>
+          <div class="tp-line white"></div>
+          <div class="tp-line white short"></div>
+          <div class="tp-line white"></div>
+          <div class="tp-line white shorter"></div>
+        </div>
+        <div class="template-info">
+          <span class="template-name">Creative Gradient</span>
+          <span class="template-label label-pro">Premium</span>
+        </div>
+      </div>
+
+      <div class="template-card" onclick="selectTemplate('elegant')">
+        <div class="template-preview elegant">
+          <div class="tp-name white">DANIEL LEE</div>
+          <div style="font-size:10px;color:rgba(255,255,255,0.6);margin-bottom:8px;">Data Scientist</div>
+          <div class="tp-divider white"></div>
+          <div class="tp-line white"></div>
+          <div class="tp-line white short"></div>
+          <div class="tp-line white"></div>
+        </div>
+        <div class="template-info">
+          <span class="template-name">Elegant Green</span>
+          <span class="template-label label-pro">Premium</span>
+        </div>
+      </div>
+
+      <div class="template-card" onclick="selectTemplate('bold')">
+        <div class="template-preview bold">
+          <div class="tp-name white">EMMA CLARK</div>
+          <div style="font-size:10px;color:rgba(255,255,255,0.6);margin-bottom:8px;">Marketing Lead</div>
+          <div class="tp-divider white"></div>
+          <div class="tp-line white"></div>
+          <div class="tp-line white short"></div>
+          <div class="tp-line white"></div>
+        </div>
+        <div class="template-info">
+          <span class="template-name">Bold Red</span>
+          <span class="template-label label-pro">Premium</span>
+        </div>
+      </div>
+
+      <div class="template-card" onclick="selectTemplate('dark')">
+        <div class="template-preview dark">
+          <div class="tp-name white">RYAN PATEL</div>
+          <div style="font-size:10px;color:rgba(255,255,255,0.4);margin-bottom:8px;">DevOps Engineer</div>
+          <div class="tp-divider white"></div>
+          <div class="tp-line white"></div>
+          <div class="tp-line white short"></div>
+          <div class="tp-line white"></div>
+        </div>
+        <div class="template-info">
+          <span class="template-name">Pure Dark</span>
+          <span class="template-label label-free">Free</span>
+        </div>
+      </div>
+
+      <div class="template-card" onclick="selectTemplate('clean')">
+        <div class="template-preview clean">
+          <div class="tp-name dark">LISA WANG</div>
+          <div style="font-size:10px;color:#94a3b8;margin-bottom:8px;">Project Manager</div>
+          <div class="tp-divider blue"></div>
+          <div class="tp-line blue"></div>
+          <div class="tp-line blue short"></div>
+          <div class="tp-line blue"></div>
+        </div>
+        <div class="template-info">
+          <span class="template-name">Clean Blue</span>
+          <span class="template-label label-free">Free</span>
+        </div>
+      </div>
+
+    </div>
+    <div class="templates-cta">
+      <p>Ready to use one of these templates?</p>
+      <button class="cta-btn" onclick="window.location.href='form.html'">Start Building Now →</button>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="how-it-works" id="how">
+    <p class="section-label">Process</p>
+    <h2 class="section-title">How It Works</h2>
+    <p class="section-sub">Create your professional resume in 4 simple steps.</p>
+    <div class="steps-grid">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h3>Fill Your Details</h3>
+        <p>Enter your personal info, skills, education, and work experience in our easy form.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h3>Choose Template</h3>
+        <p>Pick from 10+ professional templates — modern, minimal, creative, and more.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h3>Live Preview</h3>
+        <p>See your resume update instantly as you make changes. Perfect it in real-time.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <h3>Download PDF</h3>
+        <p>Export your polished, print-ready resume as a PDF with a single click.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section class="pricing-section" id="pricing">
+    <p class="section-label">Pricing</p>
+    <h2 class="section-title">Simple Pricing</h2>
+    <p class="section-sub">Start free. Upgrade anytime for premium features.</p>
+    <div class="pricing-grid">
+      <div class="pricing-card">
+        <h3>Basic</h3>
+        <div class="pricing-price">$0<span>/mo</span></div>
+        <p class="pricing-desc">Perfect to get started.</p>
+        <ul class="pricing-features">
+          <li>4 Free Templates</li>
+          <li>PDF Download</li>
+          <li>Live Preview</li>
+          <li>Basic Sections</li>
+        </ul>
+        <button class="pricing-btn outline" onclick="window.location.href='form.html'">Start Free</button>
+      </div>
+      <div class="pricing-card popular">
+        <div class="popular-badge">⭐ Most Popular</div>
+        <h3>Premium</h3>
+        <div class="pricing-price">$1<span>/mo</span></div>
+        <p class="pricing-desc">For serious job seekers.</p>
+        <ul class="pricing-features">
+          <li>All 10+ Templates</li>
+          <li>PDF + Word Download</li>
+          <li>Live Preview</li>
+          <li>All Sections</li>
+          <li>Color Themes</li>
+        </ul>
+        <button class="pricing-btn filled" onclick="openModal('signupModal')">Get Premium</button>
+      </div>
+      <div class="pricing-card">
+        <h3>Professional</h3>
+        <div class="pricing-price">$5<span>/one-time</span></div>
+        <p class="pricing-desc">Done-for-you service.</p>
+        <ul class="pricing-features">
+          <li>Everything in Premium</li>
+          <li>Expert Review</li>
+          <li>ATS Optimization</li>
+          <li>Priority Support</li>
+        </ul>
+        <button class="pricing-btn outline" onclick="openModal('signupModal')">Get Started</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-top">
+      <div>
+        <div class="footer-logo">SmartCV</div>
+        <p class="footer-tagline">Build professional resumes that get you hired. Fast, free, and beautiful.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Product</h4>
+        <ul>
+          <li><a href="form.html">Build Resume</a></li>
+          <li><a href="#templates">Templates</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="#">Privacy</a></li>
+          <li><a href="#">Terms</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 SmartCV Builder. All rights reserved.</p>
+      <p>Built with ❤️ for job seekers worldwide</p>
+    </div>
+  </footer>
+
+  <!-- LOGIN MODAL -->
+  <div class="modal-overlay" id="loginModal">
+    <div class="modal">
+      <button class="modal-close" onclick="closeModal('loginModal')">✕</button>
+      <div class="modal-logo">SmartCV</div>
+      <h2 class="modal-title">Welcome Back 👋</h2>
+      <p class="modal-sub">Login to access your saved resumes</p>
+      <div class="input-group">
+        <label>Email Address</label>
+        <input type="email" placeholder="you@example.com" id="loginEmail"/>
+      </div>
+      <div class="input-group">
+        <label>Password</label>
+        <input type="password" placeholder="Enter your password" id="loginPass"/>
+      </div>
+      <button class="modal-btn" onclick="handleLogin()">Login →</button>
+      <p class="modal-switch">Don't have an account? <span onclick="switchModal('loginModal','signupModal')">Sign Up Free</span></p>
+    </div>
+  </div>
+
+  <!-- SIGNUP MODAL -->
+  <div class="modal-overlay" id="signupModal">
+    <div class="modal">
+      <button class="modal-close" onclick="closeModal('signupModal')">✕</button>
+      <div class="modal-logo">SmartCV</div>
+      <h2 class="modal-title">Create Account 🚀</h2>
+      <p class="modal-sub">Join thousands building great resumes</p>
+      <div class="input-group">
+        <label>Full Name</label>
+        <input type="text" placeholder="John Smith" id="signupName"/>
+      </div>
+      <div class="input-group">
+        <label>Email Address</label>
+        <input type="email" placeholder="you@example.com" id="signupEmail"/>
+      </div>
+      <div class="input-group">
+        <label>Password</label>
+        <input type="password" placeholder="Minimum 6 characters" id="signupPass"/>
+      </div>
+      <button class="modal-btn" onclick="handleSignup()">Create Account →</button>
+      <p class="modal-switch">Already have an account? <span onclick="switchModal('signupModal','loginModal')">Login</span></p>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    function selectTemplate(name) {
+      localStorage.setItem('smartcv_template', name);
+      showToast('✅ Template selected: ' + name.charAt(0).toUpperCase() + name.slice(1));
+      setTimeout(() => window.location.href = 'form.html', 800);
+    }
+  </script>
+</body>
+</html>
