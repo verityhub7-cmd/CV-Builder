@@ -82,23 +82,34 @@ async function signup() {
   const password =
     document.getElementById("password").value;
 
+  // Create Auth User
   const { data, error } =
-    await client
-      .from('sign up')
-      .insert([
-        {
-          name: name,
-          email: email,
-          password: password
-        }
-      ]);
+    await client.auth.signUp({
+
+      email: email,
+      password: password
+
+    });
 
   if(error){
     alert(error.message);
+    return;
   }
-  else{
-    alert("Signup Successful");
-  }
+
+  // Save Extra Data
+  const user = data.user;
+
+  await client
+    .from('profiles')
+    .insert([
+      {
+        id: user.id,
+        name: name,
+        email: email
+      }
+    ]);
+
+  alert("Signup Successful");
 }
 
 // ===== UPDATE NAV AFTER LOGIN =====
