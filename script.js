@@ -100,7 +100,7 @@ async function signup() {
   const user = data.user;
 
   await client
-    .from('profiles')
+    .from('sign up')
     .insert([
       {
         id: user.id,
