@@ -358,13 +358,13 @@
       <p class="modal-sub">Login to access your saved resumes</p>
       <div class="input-group">
         <label>Email Address</label>
-        <input type="email" placeholder="you@example.com" id="loginEmail"/>
+        <input type="email" placeholder="you@example.com" id="email"/>
       </div>
       <div class="input-group">
         <label>Password</label>
-        <input type="password" placeholder="Enter your password" id="loginPass"/>
+        <input type="password" placeholder="Enter your password" id="password"/>
       </div>
-      <button class="modal-btn" onclick="handleLogin()">Login →</button>
+      <button class="modal-btn" onclick="login()">Login →</button>
       <p class="modal-switch">Don't have an account? <span onclick="switchModal('loginModal','signupModal')">Sign Up Free</span></p>
     </div>
   </div>
@@ -378,17 +378,17 @@
       <p class="modal-sub">Join thousands building great resumes</p>
       <div class="input-group">
         <label>Full Name</label>
-        <input type="text" placeholder="John Smith" id="signupName"/>
+        <input type="text" placeholder="John Smith" id="name"/>
       </div>
       <div class="input-group">
         <label>Email Address</label>
-        <input type="email" placeholder="you@example.com" id="signupEmail"/>
+        <input type="email" placeholder="you@example.com" id="email"/>
       </div>
       <div class="input-group">
         <label>Password</label>
-        <input type="password" placeholder="Minimum 6 characters" id="signupPass"/>
+        <input type="password" placeholder="Minimum 6 characters" id="password"/>
       </div>
-      <button class="modal-btn" onclick="handleSignup()">Create Account →</button>
+      <button class="modal-btn" onclick="signup()">Create Account →</button>
       <p class="modal-switch">Already have an account? <span onclick="switchModal('signupModal','loginModal')">Login</span></p>
     </div>
   </div>

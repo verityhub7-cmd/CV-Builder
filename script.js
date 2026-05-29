@@ -46,27 +46,59 @@ function showToast(msg, type = 'success') {
 }
 
 // ===== LOGIN =====
-function handleLogin() {
-  const email = document.getElementById('loginEmail').value.trim();
-  const pass  = document.getElementById('loginPass').value.trim();
-  if (!email || !pass) { showToast('Please fill in all fields.', 'error'); return; }
-  localStorage.setItem('smartcv_user', JSON.stringify({ email }));
-  closeModal('loginModal');
-  showToast('✅ Login successful! Welcome back.');
-  updateNavForUser(email);
+async function login() {
+
+  const email =
+    document.getElementById("email").value;
+
+  const password =
+    document.getElementById("password").value;
+
+  const { data, error } =
+    await client.auth.signInWithPassword({
+
+      email: email,
+      password: password
+
+    });
+
+  if(error){
+    alert(error.message);
+  }
+  else{
+    alert("Login Successful");
+  }
 }
 
 // ===== SIGNUP =====
-function handleSignup() {
-  const name  = document.getElementById('signupName').value.trim();
-  const email = document.getElementById('signupEmail').value.trim();
-  const pass  = document.getElementById('signupPass').value.trim();
-  if (!name || !email || !pass) { showToast('Please fill in all fields.', 'error'); return; }
-  if (pass.length < 6) { showToast('Password must be at least 6 characters.', 'error'); return; }
-  localStorage.setItem('smartcv_user', JSON.stringify({ name, email }));
-  closeModal('signupModal');
-  showToast(`🎉 Welcome, ${name}! Account created.`);
-  updateNavForUser(name);
+async function signup() {
+
+  const name =
+    document.getElementById("name").value;
+
+  const email =
+    document.getElementById("email").value;
+
+  const password =
+    document.getElementById("password").value;
+
+  const { data, error } =
+    await client
+      .from('sign up')
+      .insert([
+        {
+          name: name,
+          email: email,
+          password: password
+        }
+      ]);
+
+  if(error){
+    alert(error.message);
+  }
+  else{
+    alert("Signup Successful");
+  }
 }
 
 // ===== UPDATE NAV AFTER LOGIN =====
