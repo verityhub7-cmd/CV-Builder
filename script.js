@@ -1,3 +1,11 @@
+const supabaseUrl = "sb_publishable_uUoz0BeKqg04n1u8NmSaAQ_pCShdaR-";
+
+const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBjdG5qZWN3b3Vkdm5xY292bmtsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk5MDI2NjAsImV4cCI6MjA5NTQ3ODY2MH0.6vi-oaOJf06yUFOSbsvLxAK371y8qjufCRLpLid5IQk";
+const client = supabase.createClient(
+  supabaseUrl,
+  supabaseKey
+);
+
 // ===== MODAL FUNCTIONS =====
 function openModal(id) {
   document.getElementById(id).classList.add('active');
@@ -81,3 +89,4 @@ window.addEventListener('DOMContentLoaded', () => {
   const user = JSON.parse(localStorage.getItem('smartcv_user') || 'null');
   if (user) updateNavForUser(user.name || user.email);
 });
+
