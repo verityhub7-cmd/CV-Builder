@@ -73,43 +73,43 @@ async function login() {
 // ===== SIGNUP =====
 async function signup() {
 
-  const name =
-    document.getElementById("name").value;
+  const name  = document.getElementById('name').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const pass  = document.getElementById('password').value.trim();
 
-  const email =
-    document.getElementById("email").value;
-
-  const password =
-    document.getElementById("password").value;
-
-  // Create Auth User
-  const { data, error } =
-    await client.auth.signUp({
-
-      email: email,
-      password: password
-
-    });
-
-  if(error){
-    alert(error.message);
+  if (!name || !email || !pass) {
+    showToast('Please fill in all fields.', 'error');
     return;
   }
 
-  // Save Extra Data
-  const user = data.user;
+  if (pass.length < 6) {
+    showToast('Password must be at least 6 characters.', 'error');
+    return;
+  }
 
-  await client
-    .from('sign up')
+  const { data, error } = await client
+    .from('signup')
     .insert([
       {
-        id: user.id,
         name: name,
-        email: email
+        email: email,
+        password: pass
       }
     ]);
 
-  alert("Signup Successful");
+  if (error) {
+    showToast(error.message, 'error');
+    return;
+  }
+
+  localStorage.setItem(
+    'smartcv_user',
+    JSON.stringify({ name, email })
+  );
+
+  closeModal('signupModal');
+  showToast(`🎉 Welcome, ${name}! Account created.`);
+  updateNavForUser(name);
 }
 
 // ===== UPDATE NAV AFTER LOGIN =====
