@@ -45,37 +45,12 @@ function showToast(msg, type = 'success') {
   toast._timeout = setTimeout(() => toast.classList.remove('show'), 3200);
 }
 
-// ===== LOGIN =====
-async function login() {
-
-  const email =
-    document.getElementById("email").value;
-
-  const password =
-    document.getElementById("password").value;
-
-  const { data, error } =
-    await client.auth.signInWithPassword({
-
-      email: email,
-      password: password
-
-    });
-
-  if(error){
-    alert(error.message);
-  }
-  else{
-    alert("Login Successful");
-  }
-}
 
 // ===== SIGNUP =====
 async function signup() {
-
-  const name  = document.getElementById('name').value.trim();
-  const email = document.getElementById('email').value.trim();
-  const pass  = document.getElementById('password').value.trim();
+  const name  = document.getElementById('signup-name').value.trim();
+  const email = document.getElementById('signup-email').value.trim();
+  const pass  = document.getElementById('signup-password').value.trim();
 
   if (!name || !email || !pass) {
     showToast('Please fill in all fields.', 'error');
@@ -89,27 +64,42 @@ async function signup() {
 
   const { data, error } = await client
     .from('signup')
-    .insert([
-      {
-        name: name,
-        email: email,
-        password: pass
-      }
-    ]);
+    .insert([{ name: name, email: email, password: pass }]);
 
   if (error) {
     showToast(error.message, 'error');
     return;
   }
 
-  localStorage.setItem(
-    'smartcv_user',
-    JSON.stringify({ name, email })
-  );
-
+  localStorage.setItem('smartcv_user', JSON.stringify({ name, email }));
   closeModal('signupModal');
-  showToast(`🎉 Welcome, ${name}! Account created.`);
+  showToast(`Welcome, ${name}! Account created.`);
   updateNavForUser(name);
+}
+
+// ===== LOGIN =====
+async function login() {
+  const email    = document.getElementById('login-email').value.trim();
+  const password = document.getElementById('login-password').value.trim();
+
+  if (!email || !password) {
+    showToast('Please fill in all fields.', 'error');
+    return;
+  }
+
+  const { data, error } = await client.auth.signInWithPassword({
+    email: email,
+    password: password
+  });
+
+  if (error) {
+    showToast(error.message, 'error');
+  } else {
+    localStorage.setItem('smartcv_user', JSON.stringify({ email }));
+    closeModal('loginModal');
+    showToast('Login successful!');
+    updateNavForUser(email);
+  }
 }
 
 // ===== UPDATE NAV AFTER LOGIN =====
