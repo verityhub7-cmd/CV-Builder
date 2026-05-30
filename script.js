@@ -93,7 +93,7 @@ async function signup() {
       {
         name: name,
         email: email,
-        password: pass
+        password: password
       }
     ]);
 
