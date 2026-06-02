@@ -1,3 +1,4 @@
+
 const supabaseUrl = "https://pctnjecwoudvnqcovnkl.supabase.co";
 
 const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBjdG5qZWN3b3Vkdm5xY292bmtsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk5MDI2NjAsImV4cCI6MjA5NTQ3ODY2MH0.6vi-oaOJf06yUFOSbsvLxAK371y8qjufCRLpLid5IQk";
