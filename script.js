@@ -63,9 +63,13 @@ async function signup() {
     return;
   }
 
-  const { data, error } = await client
-    .from('signup')
-    .insert([{ name: name, email: email, password: pass }]);
+  const { data, error } = await client.public.signup({
+    email: email,
+    password: pass,
+    options: {
+      data: { full_name: name }
+    }
+  });
 
   if (error) {
     showToast(error.message, 'error');
@@ -74,7 +78,7 @@ async function signup() {
 
   localStorage.setItem('smartcv_user', JSON.stringify({ name, email }));
   closeModal('signupModal');
-  showToast(`Welcome, ${name}! Account created.`);
+  showToast(`Welcome, ${name}! Account created. Please check your email to confirm.`);
   updateNavForUser(name);
 }
 
@@ -120,7 +124,26 @@ function handleLogout() {
 
 // ===== CHECK SESSION ON LOAD =====
 window.addEventListener('DOMContentLoaded', () => {
+  prefillFormFromUser();
   const user = JSON.parse(localStorage.getItem('smartcv_user') || 'null');
   if (user) updateNavForUser(user.name || user.email);
 });
 
+// ===== PREFILL FORM FROM SIGNED-IN USER =====
+function prefillFormFromUser() {
+  const user = JSON.parse(localStorage.getItem('smartcv_user') || 'null');
+  if (!user) return;
+
+  const nameField  = document.getElementById('fullName');
+  const emailField = document.getElementById('email');
+
+  if (nameField && user.name && !nameField.value) {
+    nameField.value = user.name;
+    nameField.dispatchEvent(new Event('input'));
+  }
+
+  if (emailField && user.email && !emailField.value) {
+    emailField.value = user.email;
+    emailField.dispatchEvent(new Event('input'));
+  }
+}
