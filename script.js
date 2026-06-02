@@ -63,7 +63,7 @@ async function signup() {
     return;
   }
 
-  const { data, error } = await client.public.signup({
+  const { data, error } = await client.auth.signup({
     email: email,
     password: pass,
     options: {
