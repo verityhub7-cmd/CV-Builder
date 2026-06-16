@@ -1,7 +1,13 @@
-const SUPABASE_URL = "PASTE_YOUR_SUPABASE_PROJECT_URL";
-const SUPABASE_ANON_KEY = "PASTE_YOUR_SUPABASE_ANON_KEY";
+const supabaseUrl = "https://pctnjecwoudvnqcovnkl.supabase.co";
+const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBjdG5qZWN3b3Vkdm5xY292bmtsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk5MDI2NjAsImV4cCI6MjA5NTQ3ODY2MH0.6vi-oaOJf06yUFOSbsvLxAK371y8qjufCRLpLid5IQk";
 
-const client = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+const client = supabase.createClient(supabaseUrl, supabaseKey, {
+  auth: {
+    persistSession: true,
+    autoRefreshToken: true,
+    detectSessionInUrl: true
+  }
+});
 
 function openModal(id) {
   const modal = document.getElementById(id);
@@ -142,54 +148,67 @@ async function requireAuthAndOpenBuilder(path = 'form.html') {
 }
 
 async function signup() {
-  const fullName = document.getElementById("signup-name").value.trim();
-  const email = document.getElementById("signup-email").value.trim();
-  const password = document.getElementById("signup-password").value.trim();
+  const name = document.getElementById('signup-name')?.value.trim();
+  const email = document.getElementById('signup-email')?.value.trim();
+  const pass = document.getElementById('signup-password')?.value.trim();
 
-  if (!fullName || !email || !password) {
-    alert("Please fill all fields.");
+  if (!name || !email || !pass) {
+    showToast('Please fill in all fields.', 'error');
+    return;
+  }
+  if (pass.length < 6) {
+    showToast('Password must be at least 6 characters.', 'error');
     return;
   }
 
-  const { error } = await client.auth.signUp({
-    email: email,
-    password: password,
-    options: {
-      data: {
-        full_name: fullName
-      }
-    }
+  const { data, error } = await client.auth.signUp({
+    email,
+    password: pass,
+    options: { data: { full_name: name } }
   });
 
   if (error) {
-    alert(error.message);
+    showToast(error.message, 'error');
     return;
   }
 
-  alert("Account created successfully. Please login.");
+  if (data && data.user) await ensureProfile(data.user);
+
+  closeModal('signupModal');
+  await updateNavFromSession();
+
+  if (data && data.session) {
+    showToast('Account created successfully.');
+    const next = consumeAfterLogin();
+    if (next) setTimeout(() => window.location.href = next, 700);
+  } else {
+    showToast('Account created. Please confirm your email, then login.');
+  }
 }
 
 async function login() {
-  const email = document.getElementById("login-email").value.trim();
-  const password = document.getElementById("login-password").value.trim();
+  const email = document.getElementById('login-email')?.value.trim();
+  const password = document.getElementById('login-password')?.value.trim();
 
   if (!email || !password) {
-    alert("Please fill all fields.");
+    showToast('Please fill in all fields.', 'error');
     return;
   }
 
-  const { error } = await client.auth.signInWithPassword({
-    email: email,
-    password: password
-  });
-
+  const { data, error } = await client.auth.signInWithPassword({ email, password });
   if (error) {
-    alert("Invalid email or password.");
+    showToast(error.message, 'error');
     return;
   }
 
-  window.location.href = "form.html";
-}
+  if (data && data.user) await ensureProfile(data.user);
+  const profile = await getMyProfile();
+
+  if (profile && profile.account_status && profile.account_status !== 'active') {
+    await client.auth.signOut();
+    showToast('Your account is not active. Please contact support.', 'error');
+    return;
+  }
 
   closeModal('loginModal');
   await updateNavFromSession();

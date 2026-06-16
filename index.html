@@ -409,19 +409,5 @@
       await startCheckout();
     }
   </script>
-  <script>
-async function protectBuilderPage() {
-  const { data } = await client.auth.getSession();
-
-  if (!data.session) {
-    window.location.href = "index.html";
-    return;
-  }
-}
-
-protectBuilderPage();
-</script>
-  
 </body>
 </html>
-
