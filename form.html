@@ -237,7 +237,7 @@
     <div class="form-panel">
       <div class="form-inner">
         <h1 class="panel-title">Professional Resume Builder</h1>
-        <p class="panel-sub">Enter your details, upload a photo if required, select a professional template, and download a clean PDF.</p>
+        <p class="panel-sub">Enter your details, upload a photo if required, select a professional template, and download a clean PDF.<br><span id="autosaveStatus">Auto save is ready.</span></p>
         <div class="template-switcher">
           <label>Professional Templates</label>
           <div class="template-tabs">
@@ -499,7 +499,7 @@
       });
       return { name:g('fullName'), jobTitle:g('jobTitle'), email:g('email'), phone:g('phone'), location:g('location'), linkedin:g('linkedin'), summary:g('summary'), photo:photoData, skills:[...skills], education, experience };
     }
-    function updatePreview() { document.getElementById('resumePreview').innerHTML = renderTemplate(currentTemplate, collectData()); }
+    function updatePreview() { document.getElementById('resumePreview').innerHTML = renderTemplate(currentTemplate, collectData()); scheduleAutoSave(); }
     function safe(value) { return String(value || '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
     function nl2br(value) { return safe(value).replace(/\n/g,'<br>'); }
     function contactLine(d, sep = ' · ') { return [d.email, d.phone, d.location, d.linkedin].filter(Boolean).map(safe).join(sep); }
