@@ -4,7 +4,7 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>SmartCV Professional Resume Builder</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Source+Serif+4:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=Merriweather:wght@400;700;900&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   <style>
@@ -26,12 +26,12 @@
       --cream:#fbfaf7;
     }
     html { scroll-behavior:smooth; }
-    body { font-family:'Inter', Arial, sans-serif; background:var(--panel); color:var(--ink); }
+    body { font-family:'Poppins', Arial, sans-serif; -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility; background:var(--panel); color:var(--ink); }
     .navbar { width:100%; height:68px; background:rgba(255,255,255,.96); display:flex; align-items:center; justify-content:space-between; padding:0 4%; border-bottom:1px solid var(--line); position:sticky; top:0; z-index:200; backdrop-filter:blur(12px); }
-    .logo { font-family:'Source Serif 4', Georgia, serif; font-size:25px; font-weight:700; color:var(--accent); letter-spacing:-.4px; }
+    .logo { font-family:'Merriweather', Georgia, serif; font-size:25px; font-weight:700; color:var(--accent); letter-spacing:-.4px; }
     .logo span { color:var(--ink); }
     .nav-right { display:flex; gap:10px; align-items:center; }
-    .back-btn, .download-btn { padding:9px 18px; border-radius:10px; font-size:13px; font-weight:700; cursor:pointer; text-decoration:none; transition:.2s; font-family:'Inter', Arial, sans-serif; }
+    .back-btn, .download-btn { padding:9px 18px; border-radius:10px; font-size:13px; font-weight:700; cursor:pointer; text-decoration:none; transition:.2s; font-family:'Poppins', Arial, sans-serif; }
     .back-btn { border:1px solid var(--line); background:white; color:var(--ink); }
     .back-btn:hover { border-color:var(--accent); color:var(--accent); }
     .download-btn { border:0; background:var(--accent); color:white; box-shadow:0 10px 22px rgba(31,79,216,.18); }
@@ -41,12 +41,12 @@
     .builder-layout { display:grid; grid-template-columns:430px 1fr; min-height:calc(100vh - 72px); }
     .form-panel { background:white; border-right:1px solid var(--line); overflow-y:auto; height:calc(100vh - 72px); position:sticky; top:72px; }
     .form-inner { padding:28px 28px 60px; }
-    .panel-title { font-family:'Source Serif 4', Georgia, serif; font-size:25px; font-weight:700; letter-spacing:-.3px; margin-bottom:7px; }
+    .panel-title { font-family:'Merriweather', Georgia, serif; font-size:25px; font-weight:700; letter-spacing:-.3px; margin-bottom:7px; }
     .panel-sub { font-size:13px; color:var(--muted); margin-bottom:24px; line-height:1.6; }
     .template-switcher { margin-bottom:24px; }
     .template-switcher label { display:block; font-size:11px; font-weight:800; color:var(--muted); text-transform:uppercase; letter-spacing:1px; margin-bottom:10px; }
     .template-tabs { display:grid; grid-template-columns:repeat(4,1fr); gap:7px; }
-    .t-tab { min-height:60px; padding:8px 4px; border:1px solid var(--line); border-radius:10px; background:white; cursor:pointer; font-size:10px; font-weight:800; text-align:center; transition:.2s; color:var(--slate); font-family:'Inter', Arial, sans-serif; }
+    .t-tab { min-height:60px; padding:8px 4px; border:1px solid var(--line); border-radius:10px; background:white; cursor:pointer; font-size:10px; font-weight:800; text-align:center; transition:.2s; color:var(--slate); font-family:'Poppins', Arial, sans-serif; }
     .t-tab:hover { border-color:var(--accent); color:var(--accent); }
     .t-tab.active { border-color:var(--accent); background:var(--accent); color:white; }
     .t-tab.locked { position:relative; border-color:#f1c46a; background:#fffbeb; }
@@ -57,7 +57,7 @@
     .plan-banner.unlocked { background:#ecfdf3; border-color:#bbf7d0; }
     .plan-title { font-size:13px; font-weight:900; color:var(--ink); margin-bottom:5px; }
     .plan-text { font-size:12px; line-height:1.55; color:var(--muted); margin-bottom:10px; }
-    .unlock-btn { width:100%; padding:11px 14px; border:0; border-radius:10px; background:#111827; color:white; font-size:13px; font-weight:900; cursor:pointer; font-family:'Inter', Arial, sans-serif; }
+    .unlock-btn { width:100%; padding:11px 14px; border:0; border-radius:10px; background:#111827; color:white; font-size:13px; font-weight:900; cursor:pointer; font-family:'Poppins', Arial, sans-serif; }
     .unlock-btn:hover { background:var(--accent); }
     .t-dot { width:22px; height:22px; border-radius:6px; margin:0 auto 5px; display:block; box-shadow:inset 0 0 0 1px rgba(255,255,255,.18); }
     .form-section { background:#f8fafc; border-radius:16px; padding:20px; margin-bottom:16px; border:1px solid var(--line); }
@@ -71,20 +71,20 @@
     .form-row.full { grid-template-columns:1fr; }
     .field { display:flex; flex-direction:column; }
     .field label { font-size:11px; font-weight:800; color:var(--ink); margin-bottom:6px; text-transform:uppercase; letter-spacing:.4px; }
-    .field input, .field textarea, .field select { padding:11px 12px; border:1px solid var(--line); border-radius:10px; font-size:13px; font-family:'Inter', Arial, sans-serif; color:var(--ink); outline:none; transition:.25s; background:white; resize:vertical; }
+    .field input, .field textarea, .field select { padding:11px 12px; border:1px solid var(--line); border-radius:10px; font-size:13px; font-family:'Poppins', Arial, sans-serif; color:var(--ink); outline:none; transition:.25s; background:white; resize:vertical; }
     .field input:focus, .field textarea:focus, .field select:focus { border-color:var(--accent); box-shadow:0 0 0 4px rgba(31,79,216,.08); }
     .field textarea { min-height:84px; }
     .photo-control { display:grid; grid-template-columns:76px 1fr; gap:14px; align-items:center; }
     .photo-thumb { width:76px; height:76px; border-radius:14px; background:#e5e7eb; border:1px solid var(--line); object-fit:cover; display:none; }
     .photo-placeholder { width:76px; height:76px; border-radius:14px; background:linear-gradient(135deg,#e5e7eb,#f8fafc); border:1px dashed #aab4c4; display:flex; align-items:center; justify-content:center; font-size:10px; color:var(--muted); font-weight:800; text-align:center; }
     .photo-note { font-size:11px; color:var(--muted); line-height:1.5; margin-top:7px; }
-    .remove-photo-btn { margin-top:8px; padding:8px 12px; border:1px solid var(--line); border-radius:8px; background:white; color:var(--danger); font-size:12px; font-weight:700; cursor:pointer; font-family:'Inter', Arial, sans-serif; }
+    .remove-photo-btn { margin-top:8px; padding:8px 12px; border:1px solid var(--line); border-radius:8px; background:white; color:var(--danger); font-size:12px; font-weight:700; cursor:pointer; font-family:'Poppins', Arial, sans-serif; }
     .skills-wrap { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:10px; }
     .skill-tag { background:var(--accent-light); color:var(--accent); padding:6px 12px; border-radius:50px; font-size:12px; font-weight:700; display:flex; align-items:center; gap:6px; }
     .skill-tag button { background:none; border:none; color:var(--accent); cursor:pointer; font-size:14px; line-height:1; padding:0; }
     .skill-row { display:flex; gap:8px; }
-    .skill-row input { flex:1; padding:11px 12px; border:1px solid var(--line); border-radius:10px; font-size:13px; font-family:'Inter', Arial, sans-serif; outline:none; }
-    .add-skill-btn, .add-entry-btn, .submit-btn, .remove-btn { font-family:'Inter', Arial, sans-serif; cursor:pointer; transition:.2s; }
+    .skill-row input { flex:1; padding:11px 12px; border:1px solid var(--line); border-radius:10px; font-size:13px; font-family:'Poppins', Arial, sans-serif; outline:none; }
+    .add-skill-btn, .add-entry-btn, .submit-btn, .remove-btn { font-family:'Poppins', Arial, sans-serif; cursor:pointer; transition:.2s; }
     .add-skill-btn { padding:11px 16px; background:var(--accent); color:white; border:0; border-radius:10px; font-size:13px; font-weight:800; white-space:nowrap; }
     .entry-block { border:1px solid var(--line); border-radius:14px; padding:16px; margin-bottom:12px; position:relative; background:white; }
     .remove-btn { position:absolute; top:12px; right:12px; background:#fff7ed; color:var(--danger); border:1px solid #fed7aa; border-radius:8px; padding:5px 10px; font-size:11px; font-weight:800; }
@@ -97,8 +97,8 @@
     .preview-toolbar { width:100%; max-width:760px; display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; }
     .preview-label { font-size:12px; font-weight:800; color:var(--muted); text-transform:uppercase; letter-spacing:1px; }
     #resumePreview { width:100%; max-width:760px; background:white; box-shadow:0 18px 50px rgba(15,23,42,.18); border-radius:4px; min-height:980px; overflow:hidden; transition:.3s; }
-    .cv { font-family:'Inter', Arial, sans-serif; color:#111827; min-height:980px; background:white; }
-    .cv-name { font-family:'Source Serif 4', Georgia, serif; font-weight:700; letter-spacing:-.5px; line-height:1.05; }
+    .cv { font-family:'Poppins', Arial, sans-serif; color:#111827; min-height:980px; background:white; }
+    .cv-name { font-family:'Merriweather', Georgia, serif; font-weight:700; letter-spacing:-.5px; line-height:1.05; }
     .cv-role { font-weight:700; color:var(--accent); letter-spacing:.2px; }
     .cv-contact { font-size:11.5px; color:#667085; line-height:1.7; }
     .cv-section { margin-top:22px; }
@@ -217,7 +217,7 @@
 
     .auth-gate { position:fixed; inset:0; z-index:9999; background:linear-gradient(135deg,#0f2544,#1f4fd8); display:flex; align-items:center; justify-content:center; padding:20px; }
     .auth-gate-box { width:min(420px,100%); background:white; border-radius:18px; padding:34px 28px; text-align:center; box-shadow:0 24px 80px rgba(15,23,42,.35); }
-    .auth-gate-box h2 { font-family:'Source Serif 4', Georgia, serif; font-size:28px; color:var(--ink); margin-bottom:8px; }
+    .auth-gate-box h2 { font-family:'Merriweather', Georgia, serif; font-size:28px; color:var(--ink); margin-bottom:8px; }
     .auth-gate-box p { color:var(--muted); font-size:14px; line-height:1.7; }
     body.auth-ok .auth-gate { display:none; }
   </style>
