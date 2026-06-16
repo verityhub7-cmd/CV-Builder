@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SmartCV Professional Builder Payment</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Source+Serif+4:wght@500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <style>
+    body { min-height:100vh; background:#f5f7fb; font-family:Inter, Arial, sans-serif; color:#111827; }
+    .payment-shell { max-width:760px; margin:0 auto; padding:48px 20px; }
+    .payment-card { background:#fff; border:1px solid #d9e0ea; border-radius:20px; box-shadow:0 14px 44px rgba(15,23,42,.10); overflow:hidden; }
+    .payment-head { background:linear-gradient(135deg,#0f2544,#1f4fd8); color:white; padding:34px 36px; }
+    .payment-head h1 { font-family:'Source Serif 4', Georgia, serif; font-size:34px; line-height:1.2; margin:0 0 8px; }
+    .payment-head p { color:rgba(255,255,255,.78); line-height:1.7; margin:0; }
+    .payment-body { padding:32px 36px 36px; }
+    .plan-box { border:1px solid #d9e0ea; border-radius:16px; padding:18px 20px; margin-bottom:24px; background:#f8fafc; }
+    .plan-box strong { display:block; font-size:18px; margin-bottom:4px; }
+    .plan-box span { color:#667085; font-size:14px; line-height:1.6; }
+    .pay-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+    .pay-field { display:flex; flex-direction:column; gap:7px; margin-bottom:16px; }
+    .pay-field label { font-size:13px; font-weight:700; color:#334155; }
+    .pay-field input, .pay-field select { width:100%; border:1px solid #cbd5e1; border-radius:10px; padding:13px 14px; font-size:14px; font-family:Inter, Arial, sans-serif; outline:none; background:white; }
+    .pay-field input:focus, .pay-field select:focus { border-color:#1f4fd8; box-shadow:0 0 0 3px rgba(31,79,216,.10); }
+    .payment-actions { display:flex; gap:12px; flex-wrap:wrap; margin-top:8px; }
+    .primary-pay, .secondary-pay { border:0; border-radius:12px; padding:14px 24px; font-weight:800; font-size:14px; cursor:pointer; font-family:Inter, Arial, sans-serif; }
+    .primary-pay { background:#1f4fd8; color:white; box-shadow:0 10px 24px rgba(31,79,216,.22); }
+    .secondary-pay { background:#eef4ff; color:#1f4fd8; }
+    .notice { margin-top:18px; color:#667085; font-size:13px; line-height:1.8; }
+    .toast { position:fixed; bottom:24px; right:24px; background:#111827; color:white; padding:13px 18px; border-radius:10px; font-size:13px; font-weight:700; transform:translateY(80px); opacity:0; transition:.3s; z-index:9999; }
+    .toast.show { transform:translateY(0); opacity:1; }
+    .toast.error { border-left:4px solid #dc2626; }
+    .toast.success { border-left:4px solid #16a34a; }
+    @media(max-width:680px){ .pay-grid { grid-template-columns:1fr; } .payment-head, .payment-body { padding:26px 22px; } }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="logo">Smart<span>CV</span></div>
+    <div class="nav-buttons"></div>
+  </nav>
+
+  <main class="payment-shell">
+    <div class="payment-card">
+      <div class="payment-head">
+        <h1>Professional Builder Payment</h1>
+        <p>Submit your payment reference. Pro templates will unlock after admin approval in Supabase.</p>
+      </div>
+      <div class="payment-body">
+        <div class="plan-box">
+          <strong>Professional Builder Plan</strong>
+          <span>One time payment: USD 1 or PKR equivalent. Unlock Executive, Photo CV, Sidebar, and Signature templates.</span>
+        </div>
+
+        <div class="pay-grid">
+          <div class="pay-field">
+            <label>Payment Method</label>
+            <select id="paymentMethod">
+              <option value="PayFast">PayFast</option>
+              <option value="Easypaisa">Easypaisa</option>
+              <option value="JazzCash">JazzCash</option>
+              <option value="Bank Transfer">Bank Transfer</option>
+            </select>
+          </div>
+          <div class="pay-field">
+            <label>Transaction ID</label>
+            <input type="text" id="transactionId" placeholder="Enter payment transaction ID"/>
+          </div>
+          <div class="pay-field">
+            <label>Amount</label>
+            <input type="number" id="paymentAmount" value="1" min="1" step="0.01"/>
+          </div>
+          <div class="pay-field">
+            <label>Currency</label>
+            <select id="paymentCurrency">
+              <option value="USD">USD</option>
+              <option value="PKR">PKR</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="payment-actions">
+          <button class="primary-pay" onclick="submitManualPayment()">Submit Payment Reference</button>
+          <button class="secondary-pay" onclick="window.location.href='index.html'">Back to Home</button>
+        </div>
+        <p class="notice">Admin must verify the payment in your merchant account and then approve the transaction from Supabase. After approval, the user account becomes Pro automatically.</p>
+      </div>
+    </div>
+  </main>
+
+  <div class="toast" id="toast"></div>
+  <script src="script.js"></script>
+  <script>
+    window.addEventListener('DOMContentLoaded', async () => {
+      const session = await getActiveSession();
+      if (!session) {
+        saveAfterLogin('payment.html');
+        window.location.href = 'index.html?login=1&next=payment.html';
+      }
+    });
+  </script>
+</body>
+</html>
